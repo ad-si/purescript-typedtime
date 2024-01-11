@@ -1,0 +1,14 @@
+package:
+  name: typedtime
+  dependencies:
+    - arrays
+    - console
+    - effect
+    - prelude
+  tests:
+    main: Main.purs
+    dependencies: []
+workspace:
+  package_set:
+    registry: 47.12.0
+  extra_packages: {}

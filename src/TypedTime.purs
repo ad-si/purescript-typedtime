@@ -1,9 +1,8 @@
 module TypedTime where
 
 import Prelude (class Show)
-import Data.Array ((:))
 import Data.Generic.Rep (class Generic)
-import Data.Generic.Rep.Show (genericShow)
+import Data.Show.Generic (genericShow)
 
 
 data Day
@@ -44,6 +43,12 @@ data Day
   | D340 | D341 | D342 | D343 | D344 | D345 | D346 | D347 | D348 | D349
   | D350 | D351 | D352 | D353 | D354 | D355 | D356 | D357 | D358 | D359
   | D360 | D361 | D362 | D363 | D364 | D365
+
+
+-- -- TODO: This takes too long to compile
+-- derive instance genericDay :: Generic Day _
+-- instance showDay :: Show Day where
+--   show = genericShow
 
 instance showDay :: Show Day where
   show day = case day of
@@ -487,21 +492,3 @@ data Date
 
 derive instance genericDate :: Generic Date _
 instance showDate :: Show Date where show = genericShow
-
-
-examples :: Array Date
-examples = (
-  LeapYear003 After0 E2000                   (Leap D001) : -- 2000-01-01
-  NormYear003 After0 E2000              Add1       D001  : -- 2001-01-01
-
-  LeapYear099 After0 E2000        Add04      (Leap D001) : -- 2004-01-01
-  NormYear099 After0 E2000        Add04 Add1       D001  : -- 2005-01-01
-  NormYear099 After0 E2000        Add16 Add2       D339  : -- 2018-01-01
-  LeapYear099 After0 E2000        Add20       Leap_D366  : -- 2020-12-31
-
-  NormYear300 After0 E2000 Add100                  D001  : -- 2100-01-01
-  NormYear303 After0 E2000 Add100       Add1       D100  : -- 2101-01-01
-
-  LeapYear399 After0 E2000 Add100 Add04      (Leap D100) : -- 2101-01-01
-  NormYear399 After0 E2000 Add100 Add04 Add1       D100  : -- 2105-01-01
-  [])
